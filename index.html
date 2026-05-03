@@ -49,6 +49,14 @@
             transition: 0.2s;
         }
 
+        .done {
+            display: flex;
+            background-color: greenyellow;
+            padding: 8px;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+
         .task:hover {
             box-shadow: 0px 3px 15px rgba(97, 97, 97, 0.843);
         }
@@ -114,15 +122,17 @@
 
     document.getElementById("add-button").addEventListener("click", function () {
         let taskName = prompt("Ajouter une tâche")
-        let now = new Date()
-        let date = "" + now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear()
-        let taskObj = {
-            "title": taskName,
-            "date": date,
-            "isDone": false
+        if (taskName !== null && taskName.trim() !== ""){
+            let now = new Date()
+            let date = "" + now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear()
+            let taskObj = {
+                "title": taskName.trim(),
+                "date": date,
+                "isDone": false
+            }
+            tasks.push(taskObj)
+            fillTasksOnThePage()
         }
-        tasks.push(taskObj)
-        fillTasksOnThePage()
     })
 
     function fillTasksOnThePage() {
@@ -131,7 +141,7 @@
         for (index in tasks) {
 
             let content = `
-                                <div class="task">
+                                <div class="task ${tasks[index].isDone ? 'done' : ''}" >
                                     <!-- TASK INFO -->
                                     <div style="width: 70%; " >
                                         <h2>${tasks[index].title}</h2>
@@ -150,16 +160,28 @@
                                         <button onclick = "deleteTask(${index})" class="circular" style="background-color: red; color: white;">
                                             <span class="material-symbols-outlined">delete</span>
                                         </button>
-                                        <button class="circular" style="background-color: green; color: white;">
-                                            <span class="material-symbols-outlined">
-                                                check
-                                            </span>
-                                        </button>
+                                        
+                                        
+                                        ${tasks[index].isDone ?
+                    `<button onclick = "toggleTaskCompletion(${index})" class="circular" style="background-color: rgb(118,0,101); color: white;">
+                                                <span class="material-symbols-outlined">
+                                                    cancel 
+                                                </span>
+                                            </button>`
+                    :
+                    `<button onclick = "toggleTaskCompletion(${index})" class="circular" style="background-color: green; color: white;">
+                                                <span class="material-symbols-outlined">
+                                                    check    
+                                                </span>
+                                            </button>`}
+                                        
                                         <button onclick = "editTask(${index})" class="circular" style="background-color: blue; color: white;">
                                             <span class="material-symbols-outlined">
                                                 edit
                                             </span>
                                         </button>
+                                        
+
                                     </div>
                                     <!--// TASK ACTIONS //-->                        
                                 </div>
@@ -169,15 +191,15 @@
         }
     }
 
-    function deleteTask(index){
-            let isConfirmed = confirm(`Voulez-vous vraiment supprimer la tâche ${tasks[index].title}`)
-        if (isConfirmed){
-            tasks.splice(index,1)
+    function deleteTask(index) {
+        let isConfirmed = confirm(`Voulez-vous vraiment supprimer la tâche ${tasks[index].title}`)
+        if (isConfirmed) {
+            tasks.splice(index, 1)
             fillTasksOnThePage()
         }
     }
 
-    function editTask(index){
+    function editTask(index) {
         const task = tasks[index];
         const newTitle = prompt("Modifier le texte de la tâche :", task.title);
 
@@ -185,6 +207,12 @@
             task.title = newTitle.trim();
             fillTasksOnThePage();
         }
+    }
+
+    function toggleTaskCompletion(index) {
+        const task = tasks[index];
+        task.isDone = !task.isDone
+        fillTasksOnThePage();
     }
 
 </script>
