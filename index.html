@@ -155,7 +155,7 @@
                                                 check
                                             </span>
                                         </button>
-                                        <button class="circular" style="background-color: blue; color: white;">
+                                        <button onclick = "editTask(${index})" class="circular" style="background-color: blue; color: white;">
                                             <span class="material-symbols-outlined">
                                                 edit
                                             </span>
@@ -175,8 +175,14 @@
             tasks.splice(index,1)
             fillTasksOnThePage()
         }
-
     }
+
+    function editTask(index){
+        const newTitle = prompt("Modifier le texte de la tâche :", tasks[index].title);
+        tasks[index].title = newTitle
+        fillTasksOnThePage() 
+    }
+
 </script>
 
 </html>
