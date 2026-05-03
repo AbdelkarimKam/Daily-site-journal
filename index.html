@@ -128,26 +128,26 @@
     function fillTasksOnThePage() {
         document.getElementById("tasks").innerHTML = ""
 
-        for (task of tasks) {
+        for (index in tasks) {
 
             let content = `
                                 <div class="task">
                                     <!-- TASK INFO -->
                                     <div style="width: 70%; " >
-                                        <h2>${task.title}</h2>
+                                        <h2>${tasks[index].title}</h2>
                                         <div style="display: inline-flex; align-items: center; gap: 4px;">
                                             <span class="material-symbols-outlined">
                                                 calendar_month
                                             </span>
                                             <span>
-                                                ${task.date}
+                                                ${tasks[index].date}
                                             </span>
                                         </div>
                                     </div>
                                     <!--// TASK //-->
                                     <!-- TASK ACTIONS -->
                                     <div style="display: flex; justify-content: space-between; align-items: center; width: 20%; ">
-                                        <button class="circular" style="background-color: red; color: white;">
+                                        <button onclick = "deleteTask(${index})" class="circular" style="background-color: red; color: white;">
                                             <span class="material-symbols-outlined">delete</span>
                                         </button>
                                         <button class="circular" style="background-color: green; color: white;">
@@ -169,6 +169,14 @@
         }
     }
 
+    function deleteTask(index){
+            let isConfirmed = confirm(`Voulez-vous vraiment supprimer la tâche ${tasks[index].title}`)
+        if (isConfirmed){
+            tasks.splice(index,1)
+            fillTasksOnThePage()
+        }
+
+    }
 </script>
 
 </html>
