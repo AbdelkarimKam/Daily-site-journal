@@ -110,52 +110,64 @@
         },
     ]
 
+    fillTasksOnThePage()
 
-
-    for (task of tasks) {
-
-        let content = `
-                            <div class="task">
-                                <!-- TASK INFO -->
-                                <div style="width: 70%; " >
-                                    <h2>${task.title}</h2>
-                                    <div style="display: inline-flex; align-items: center; gap: 4px;">
-                                        <span class="material-symbols-outlined">
-                                            calendar_month
-                                        </span>
-                                        <span>
-                                            ${task.date}
-                                        </span>
-                                    </div>
-                                </div>
-                                <!--// TASK //-->
-                                <!-- TASK ACTIONS -->
-                                <div style="display: flex; justify-content: space-between; align-items: center; width: 20%; ">
-                                    <button class="circular" style="background-color: red; color: white;">
-                                        <span class="material-symbols-outlined">delete</span>
-                                    </button>
-                                    <button class="circular" style="background-color: green; color: white;">
-                                        <span class="material-symbols-outlined">
-                                            check
-                                        </span>
-                                    </button>
-                                    <button class="circular" style="background-color: blue; color: white;">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                    </button>
-                                </div>
-                                <!--// TASK ACTIONS //-->                        
-                            </div>
-                    `
-
-        document.getElementById("tasks").innerHTML += content
-    }
-
-    document.getElementById("add-button").addEventListener("click", function(){
+    document.getElementById("add-button").addEventListener("click", function () {
         let taskName = prompt("Ajouter une tâche")
-        alert(taskName)
+        let now = new Date()
+        let date = "" + now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear()
+        let taskObj = {
+            "title": taskName,
+            "date": date,
+            "isDone": false
+        }
+        tasks.push(taskObj)
+        fillTasksOnThePage()
     })
+
+    function fillTasksOnThePage() {
+        document.getElementById("tasks").innerHTML = ""
+
+        for (task of tasks) {
+
+            let content = `
+                                <div class="task">
+                                    <!-- TASK INFO -->
+                                    <div style="width: 70%; " >
+                                        <h2>${task.title}</h2>
+                                        <div style="display: inline-flex; align-items: center; gap: 4px;">
+                                            <span class="material-symbols-outlined">
+                                                calendar_month
+                                            </span>
+                                            <span>
+                                                ${task.date}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!--// TASK //-->
+                                    <!-- TASK ACTIONS -->
+                                    <div style="display: flex; justify-content: space-between; align-items: center; width: 20%; ">
+                                        <button class="circular" style="background-color: red; color: white;">
+                                            <span class="material-symbols-outlined">delete</span>
+                                        </button>
+                                        <button class="circular" style="background-color: green; color: white;">
+                                            <span class="material-symbols-outlined">
+                                                check
+                                            </span>
+                                        </button>
+                                        <button class="circular" style="background-color: blue; color: white;">
+                                            <span class="material-symbols-outlined">
+                                                edit
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <!--// TASK ACTIONS //-->                        
+                                </div>
+                        `
+
+            document.getElementById("tasks").innerHTML += content
+        }
+    }
 
 </script>
 
