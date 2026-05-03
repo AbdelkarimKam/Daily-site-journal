@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />   
+    <style>
+        body{
+            background-color: rgb(30, 0, 77);
+            font-family: "Elms Sans", sans-serif;
+            font-optical-sizing: auto;
+        }
+        .tasks-table{
+            background: rgb(239, 239, 239);
+            width: 60%;
+            margin-top: 130px;
+        }
+        
+        button{
+            border: none;
+            font-size: 20px;
+            box-shadow: 0px 3px 5px rgb(168, 168, 168, 0.38) ;
+        }
+        button.circular{
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .task{
+            display: flex;
+            background-color: white;
+            padding: 8px;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+        .task:hover {
+            box-shadow: 0px 3px 15px rgba(97, 97, 97, 0.843);
+        }
+    </style>
+</head>
+<body>
+
+    <div> 
+        <!-- CENTER DIV -->
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <!-- TASKS TABLE -->
+            <div class="tasks-table">
+                
+                <!-- HEADER -->
+                <div style="width: 100%;  text-align: center; background: rgb(92, 52, 155); color: white;">
+                    <h1 style="display: inline;">Journal de Bord Quotidien - Chef de Chantier</h1>
+                    <button class="circular" style="float: left; background: white; margin-left: 10px; margin-top: 5px; ">
+                        <span class="material-symbols-outlined">add</span> 
+                    </button>
+                </div>
+                <!--// HEADER //-->
+
+                <!-- TASKS -->
+                <div class="tasks" style="padding: 20px;">
+
+                    <!-- TASK -->
+                    <div class="task">
+                        <!-- TASK INFO -->
+                         <div style="width: 70%; " >
+                            <h2>Contrôle des effectifs et arrivées</h2>
+                            <div style="display: inline-flex; align-items: center; gap: 4px;">
+                                <span class="material-symbols-outlined">
+                                    calendar_month
+                                </span>
+                                <span>
+                                    10/10/2026
+                                </span>
+                            </div>
+                         </div>
+                        <!--// TASK //-->
+                        <!-- TASK ACTIONS -->
+                         <div style="display: flex; justify-content: space-between; align-items: center; width: 20%; ">
+                            <button class="circular" style="background-color: red; color: white;">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                            <button class="circular" style="background-color: green; color: white;">
+                                <span class="material-symbols-outlined">
+                                    check
+                                </span>
+                            </button>
+                            <button class="circular" style="background-color: blue; color: white;">
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </button>
+                         </div>
+                        <!--// TASK ACTIONS //-->                        
+                    </div>
+                    <!--// TASK //-->
+                </div>
+                <!--// TASKS //-->
+
+            </div>
+            <!--// TASKS TABLE //-->
+        </div>
+        <!--// CENTER DIV //-->
+    </div>
+    
+</body>
+
+<script>
+    let tasks = [
+       {
+        "title": "Vérification des plans de pose/exécution",
+        "date":"03/05/2026",
+        "isDone":false
+       },
+       {
+        "title": "Implantation, traçage et niveaux",
+        "date":"03/05/2026",
+        "isDone":false
+       },
+       {
+        "title": "Saisie des heures (pointages)",
+        "date":"03/05/2026",
+        "isDone":false
+       },              
+    ]
+</script>
+</html>
