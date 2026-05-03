@@ -178,9 +178,13 @@
     }
 
     function editTask(index){
-        const newTitle = prompt("Modifier le texte de la tâche :", tasks[index].title);
-        tasks[index].title = newTitle
-        fillTasksOnThePage() 
+        const task = tasks[index];
+        const newTitle = prompt("Modifier le texte de la tâche :", task.title);
+
+        if (newTitle !== null && newTitle.trim() !== "") {
+            task.title = newTitle.trim();
+            fillTasksOnThePage();
+        }
     }
 
 </script>
