@@ -100,23 +100,15 @@
 
 <script>
 
-    let tasks = [
-        {
-            "title": "Vérification des plans de pose/exécution",
-            "date": "01/05/2026",
-            "isDone": false
-        },
-        {
-            "title": "Implantation, traçage et niveaux",
-            "date": "02/05/2026",
-            "isDone": false
-        },
-        {
-            "title": "Saisie des heures (pointages)",
-            "date": "03/05/2026",
-            "isDone": false
-        },
-    ]
+    let tasks = []
+
+    if(localStorage.getItem("isFirstAccess") == null){
+        localStorage.setItem("isFirstAccess", true)
+        tasks = getDefaultTasks()
+        storeTasks()        
+    }
+
+    getTasksFromStorage()
 
     fillTasksOnThePage()
 
@@ -131,6 +123,7 @@
                 "isDone": false
             }
             tasks.push(taskObj)
+            storeTasks()
             fillTasksOnThePage()
         }
     })
@@ -195,6 +188,7 @@
         let isConfirmed = confirm(`Voulez-vous vraiment supprimer la tâche ${tasks[index].title}`)
         if (isConfirmed) {
             tasks.splice(index, 1)
+            storeTasks()
             fillTasksOnThePage()
         }
     }
@@ -205,6 +199,7 @@
 
         if (newTitle !== null && newTitle.trim() !== "") {
             task.title = newTitle.trim();
+            storeTasks()
             fillTasksOnThePage();
         }
     }
@@ -212,8 +207,44 @@
     function toggleTaskCompletion(index) {
         const task = tasks[index];
         task.isDone = !task.isDone
+        storeTasks()
         fillTasksOnThePage();
     }
+
+    // ========= LOCAL STORAGE =======
+
+    function storeTasks(){
+        localStorage.setItem("tasks", JSON.stringify(tasks))
+    }
+
+    function getTasksFromStorage (){
+        let retrievedTasks = JSON.parse(localStorage.getItem("tasks")) 
+        if (retrievedTasks == null){
+            tasks = []
+        }else{
+            tasks = retrievedTasks
+        } 
+    }
+
+    function getDefaultTasks() {
+    return [
+        {
+        title: "Vérification des plans de pose/exécution",
+        date: "01/05/2026",
+        isDone: false
+        },
+        {
+        title: "Implantation, traçage et niveaux",
+        date: "02/05/2026",
+        isDone: false
+        },
+        {
+        title: "Saisie des heures (pointages)",
+        date: "03/05/2026",
+        isDone: false
+        }
+    ];
+    }    
 
 </script>
 
