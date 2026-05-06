@@ -43,3 +43,9 @@ Le journal de bord propose une liste de tâches avec :
 
 ```bash
 git clone <url-du-repo>
+
+# Journal de bord quotidien — Chef de chantier (Suisse)
+
+**Démo en ligne :** https://moonlit-kitsune-0d8cd6.netlify.app/
+
+Application simple de gestion de tâches pour le suivi quotidien d’un chantier.
